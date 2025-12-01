@@ -2,7 +2,9 @@ import { defineConfig } from 'vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 export default defineConfig({
-  base: '/',
+  // 👇 AQUÍ ESTABA EL ERROR. Lo cambiamos por el nombre de tu repo:
+  base: '/VigiTechLab_Corregido-PS/',
+  
   publicDir: 'public',
   plugins: [
     viteStaticCopy({
