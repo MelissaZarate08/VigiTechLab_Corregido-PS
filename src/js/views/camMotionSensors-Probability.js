@@ -8,7 +8,7 @@ const backBtn        = document.getElementById('backBtn');
 const resultsSection = document.getElementById('results');
 const periodLabel    = document.getElementById('period-label');
 
-const API_BASE = 'https://vigitech-analisis.namixcode.cc/correlation';
+const API_BASE = 'http://54.91.198.118:8000/correlation';
 
 periodFilter.addEventListener('change', () => loadData(periodFilter.value));
 downloadBtn.addEventListener('click', () => {

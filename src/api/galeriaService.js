@@ -1,4 +1,4 @@
-const API_BASE = 'https://vigitech-data.namixcode.cc';
+const API_BASE = 'http://54.211.156.108:8081';
 
 export async function fetchGallery() {
   try {

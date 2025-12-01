@@ -1,4 +1,4 @@
-const BASE_URL = 'https://vigitech-auth.namixcode.cc/api';
+const BASE_URL = 'http://44.218.235.104:8080/api';
 
 export async function fetchAllUsers() {
   const token = localStorage.getItem('authToken');

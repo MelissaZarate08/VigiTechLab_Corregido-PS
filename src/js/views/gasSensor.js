@@ -3,7 +3,7 @@ import Toastify from 'toastify-js';
 import { navigateTo } from '../router.js';
 import { initWebSocket } from '../../api/wsService.js';
 
-const BASE_URL   = "https://vigitech-data.namixcode.cc";
+const BASE_URL   = "http://54.211.156.108:8081";
 const MAX_POINTS = 8;
 const ALERT_COOLDOWN = 5000;
 
