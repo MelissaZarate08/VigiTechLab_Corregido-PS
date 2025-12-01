@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Probabilidad y Estadística – Sensor de Gas</title>
+  <link rel="stylesheet" href="/src/css/gasSensor-Probability.css"/>
+</head>
+<body>
+  <header class="ps-header">
+    <img src="/images/Mask group.png" alt="VigiTech" class="header-logo">
+    <button id="backBtn" class="back-btn">← Volver a monitoreo real</button>
+  </header>
+
+  <main class="prob-container">
+    <h1 class="title">
+      Probabilidades y estadísticas<br/>
+      <span class="sensor-type">(Sensor de Gas)</span>
+    </h1>
+
+    <div class="filter">
+      <label for="periodFilter">Filtrar por:</label>
+      <select id="periodFilter">
+        <option value="today">Hoy</option>
+        <option value="last7">Últimos 7 días</option>
+        <option value="month">Este mes</option>
+      </select>
+      <button id="downloadBtn" class="pdf-btn">
+        <img src="/images/pdf.png" alt="Descargar PDF" />
+      </button>
+    </div>
+
+    <section class="results" id="results">
+    </section>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+@media print {
+  body { margin: 0; }
+  .no-print { display: none; }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.page {
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 20mm;
+  background-color: #fff;
+  color: #002658;
+  line-height: 1.6;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 3px solid #002658;
+  padding-bottom: 20px;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+  color: #002658;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #1556AC;
+  margin-top: 5px;
+}
+
+.description {
+  font-size: 12px;
+  color: #666;
+  margin-top: 10px;
+}
+
+section {
+  margin-bottom: 25px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #002658;
+  margin-bottom: 15px;
+  border-left: 4px solid #BAD8FF;
+  padding-left: 10px;
+}
+
+.content {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.content p {
+  margin-bottom: 10px;
+}
+
+ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.contact-box {
+  background-color: #DAEBFF;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+th {
+  background-color: #BAD8FF;
+  padding: 12px;
+  text-align: left;
+  border-bottom: 2px solid #002658;
+  font-weight: bold;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 2px solid #002658;
+  font-size: 12px;
+  color: #666;
+}
+
+.btn {
+  background-color: #002658;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #1556AC;
+}
+
+.btn-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+strong {
+  color: #002658;
+}
