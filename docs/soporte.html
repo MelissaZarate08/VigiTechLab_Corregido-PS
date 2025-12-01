@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual de Soporte - VigiTech</title>
+  <link rel="stylesheet" href="./soporte.css" />
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo"> VigiTech</div>
+      <div class="subtitle">Manual de Soporte Técnico</div>
+      <p class="description">
+        Sistema de Monitoreo Inteligente para Laboratorios Académicos
+      </p>
+    </header>
+
+    <section>
+      <h2 class="section-title"> Información General</h2>
+      <div class="content">
+        <p><strong>Nombre del Sistema:</strong> VigiTech</p>
+        <p><strong>Versión:</strong> 1.0.0</p>
+        <p><strong>Fecha de actualización:</strong> Noviembre 2025</p>
+        <p><strong>Desarrollado por:</strong> Equipo VigiTech</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"> ¿Qué es VigiTech?</h2>
+      <div class="content">
+        <p>
+          VigiTech es un sistema integral de monitoreo y seguridad diseñado específicamente 
+          para laboratorios académicos. Integra sensores inteligentes, transmisión de video 
+          en tiempo real y análisis predictivo para garantizar un ambiente seguro y eficiente.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"> Componentes del Sistema</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Sensor</th>
+            <th>Modelo</th>
+            <th>Función</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cámara</td>
+            <td>OV5647 / WEBCAM</td>
+            <td>Video en vivo y capturas de evidencia</td>
+          </tr>
+          <tr>
+            <td>Gas</td>
+            <td>MQ-2</td>
+            <td>Detección de LPG, CO y humo</td>
+          </tr>
+          <tr>
+            <td>Movimiento</td>
+            <td>PIR-501</td>
+            <td>Detección de presencia humana</td>
+          </tr>
+          <tr>
+            <td>Partículas</td>
+            <td>PMS5003-G5</td>
+            <td>Medición de PM1.0, PM2.5, PM10</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="section-title"> Preguntas Frecuentes</h2>
+      <div class="content">
+        <ul>
+          <li>
+            <strong>¿Cómo inicio sesión por primera vez?</strong><br/>
+            Usa las credenciales proporcionadas por tu administrador. Si olvidaste tu contraseña, 
+            contacta al soporte técnico.
+          </li>
+          <li>
+            <strong>¿Por qué no veo datos en tiempo real?</strong><br/>
+            Verifica que el sistema esté encendido (interruptor en Dashboard) y que el sensor 
+            específico esté activado.
+          </li>
+          <li>
+            <strong>¿Cómo descargo reportes PDF?</strong><br/>
+            Navega a la sección de estadísticas de cada sensor y haz clic en el ícono de PDF.
+          </li>
+          <li>
+            <strong>¿Qué hacer si recibo alertas constantes?</strong><br/>
+            Las alertas indican niveles críticos. Ventila el área y verifica la fuente del problema.
+          </li>
+          <li>
+            <strong>¿Cómo accedo a la galería de fotos?</strong><br/>
+            En la sección de Cámara y Movimiento, haz clic en el ícono de galería (esquina superior derecha).
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"> Solución de Problemas Comunes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Problema</th>
+            <th>Solución</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>No se carga el video de la cámara</td>
+            <td>
+              1. Verifica tu conexión a internet<br/>
+              2. Recarga la página (F5)<br/>
+              3. Verifica que el sistema esté encendido
+            </td>
+          </tr>
+          <tr>
+            <td>Datos de sensores no se actualizan</td>
+            <td>
+              1. Verifica la conexión WebSocket<br/>
+              2. Asegúrate de que el sensor esté activado<br/>
+              3. Contacta al administrador si persiste
+            </td>
+          </tr>
+          <tr>
+            <td>No recibo notificaciones de Telegram</td>
+            <td>
+              1. Verifica que hayas iniciado el bot<br/>
+              2. Revisa la configuración de notificaciones<br/>
+              3. Confirma tu ID de Telegram con el admin
+            </td>
+          </tr>
+          <tr>
+            <td>Las gráficas no se muestran</td>
+            <td>
+              1. Limpia caché del navegador<br/>
+              2. Usa un navegador actualizado (Chrome, Firefox)<br/>
+              3. Verifica que JavaScript esté habilitado
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="section-title"> Sistema de Alertas</h2>
+      <div class="content">
+        <p><strong>Umbrales de Alerta:</strong></p>
+        <ul>
+          <li>Gas MQ-2: LPG &gt; 1000 ppm, CO &gt; 50 ppm, Humo &gt; 50 ppm</li>
+          <li>Partículas: PM1.0 &gt; 12 µg/m³, PM2.5 &gt; 35 µg/m³, PM10 &gt; 50 µg/m³</li>
+          <li>Movimiento: Detección en horarios no autorizados</li>
+        </ul>
+        <p style="margin-top: 15px;">
+          <strong>Las alertas se envían mediante:</strong><br/>
+          • Notificaciones en la plataforma web<br/>
+          • Mensajes de Telegram (si está configurado)<br/>
+          • Alerta sonora en el navegador
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"> Contacto de Emergencia</h2>
+      <div class="contact-box">
+        <p><strong> NÚMEROS DE EMERGENCIA:</strong></p>
+        <ul>
+          <li> Bomberos: <strong>911</strong></li>
+          <li> Policía: <strong>911</strong></li>
+          <li> Ambulancia: <strong>132</strong></li>
+        </ul>
+        <p style="margin-top: 20px;"><strong> SOPORTE TÉCNICO:</strong></p>
+        <ul>
+          <li> Email: soporte@vigitech.com</li>
+          <li> Teléfono: +52 967 164 5751</li>
+          <li> Horario: Lunes a Viernes, 8:00 AM - 6:00 PM</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title"> Recursos Adicionales</h2>
+      <div class="content">
+        <ul>
+          <li>
+            <strong>Manual de Usuario Completo:</strong> Disponible en el portal web
+          </li>
+          <li>
+            <strong>Actualizaciones del Sistema:</strong> Notificadas por email
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 VigiTech - Sistema de Monitoreo Inteligente</p>
+      <p>Todos los derechos reservados</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,215 @@
+/* --- ESTILOS BASE (Desktop) --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Usamos min-height para permitir scroll si el formulario es muy largo */
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5;
+  /* overflow: auto es el default, no es necesario forzarlo, 
+     pero evitamos overflow-x en el wrapper */
+}
+
+.register-wrapper {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.register-image {
+  flex: 1.5;
+  /* Misma imagen de fondo */
+  background: url('/images/labRegister.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+/* Opcional: filtro oscuro para consistencia */
+.register-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 38, 88, 0.15);
+}
+
+.register-card {
+  flex: 1; /* El formulario toma el espacio necesario */
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centrado vertical */
+  align-items: center;
+  
+  /* Margen negativo para el efecto de solapamiento lateral en desktop */
+  margin-left: -4rem;
+  padding: 2rem;
+  
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 10;
+}
+
+.register-logo {
+  width: 60px; /* Un pelín más pequeño para ganar espacio vertical */
+  margin-bottom: 0.5rem;
+}
+
+.register-title {
+  font-size: 1.5rem;
+  color: #002658;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* CORRECCIÓN: Usamos max-width en lugar de padding gigante */
+.register-form {
+  width: 100%;
+  max-width: 450px; /* Un poco más ancho que login para acomodar 2 columnas */
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem; /* Espacio compacto entre filas */
+}
+
+.register-form label {
+  font-size: 0.85rem;
+  color: #1556AC;
+  text-align: left;
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+  display: block; /* Asegura que ocupe su linea */
+}
+
+.register-form input,
+.register-form select {
+  width: 100%;
+  padding: 0.6rem 1rem; /* Padding cómodo */
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 1.5rem;
+  background-color: #E6F0FF; /* Azul más claro para legibilidad */
+  color: #002658;
+  outline: none;
+  transition: box-shadow 0.2s, background-color 0.2s;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+  box-shadow: 0 0 0 2px #1556AC;
+  background-color: #fff;
+}
+
+.register-form input::placeholder {
+  color: #7a9cc6;
+}
+
+/* Manejo de columnas (Nombre/Apellido, etc) */
+.two-col {
+  display: flex;
+  gap: 1rem; /* Espacio entre las columnas */
+}
+.two-col > div {
+  flex: 1; /* Ambos inputs ocupan el mismo ancho */
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form button {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  background-color: #002658;
+  color: #ffffff;
+  border: none;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.1s ease, opacity 0.2s ease, box-shadow 0.2s;
+}
+
+.register-form button:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 38, 88, 0.3);
+}
+
+.register-footer {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: #737373;
+  text-align: center;
+}
+.register-footer a {
+  color: #1556AC;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+.register-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ESTILOS ESPECÍFICOS PARA EL ID (Manteniendo tu lógica) */
+#register-systemID:disabled {
+  background-color: #e0e0e0 !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
+  color: #777;
+}
+
+#register-systemID:enabled {
+  background-color: #E6F0FF;
+  cursor: text;
+  opacity: 1;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .register-wrapper {
+    flex-direction: column;
+  }
+
+  .register-image {
+    width: 100%;
+    /* Altura reducida en móvil porque el registro es largo */
+    height: 150px; 
+    min-height: 15vh;
+    flex: none;
+  }
+
+  .register-card {
+    width: 100%;
+    flex: 1;
+    margin-left: 0;
+    margin-top: -1.5rem; /* Efecto solapado */
+    
+    border-radius: 0;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+    padding: 2rem 1.5rem 3rem; /* Padding inferior extra para scroll cómodo */
+  }
+
+  .register-form {
+    padding: 0;
+    /* En tablet dejamos el max-width, pero en móvil full width */
+    max-width: 100%; 
+  }
+}
+
+/* Breakpoint extra para móviles muy estrechos */
+@media (max-width: 480px) {
+  /* Solo aquí rompemos las dos columnas para que no queden inputs diminutos */
+  .two-col {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}

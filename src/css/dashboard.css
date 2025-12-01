@@ -1,0 +1,417 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #002658;
+  background: #f5f7fa;
+}
+
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 0.8rem 1.5rem;
+  border-bottom: 1px solid #d3dae3;
+  z-index: 1000;
+}
+.hamburger-open {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #002658;
+}
+.header-logo {
+  height: 35px;
+  transform: translate(19px, 6px);
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+#user-name {
+  margin-right: 0.5rem;
+}
+.user-icon {
+  font-size: 1.3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  top: 2.5rem;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  width: 150px;
+  list-style: none;
+  z-index: 1000;
+}
+.dropdown li {
+  border-bottom: 1px solid #e0e0e0;
+}
+.dropdown li:last-child {
+  border: none;
+}
+.dropdown li button {
+  width: 100%;
+  padding: 0.8rem;
+  background: #eff6ff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.dropdown li button:hover {
+  background: #f0f0f0;
+}
+.dropdown.hidden {
+  display: none;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 100%;
+  width: 0;
+  overflow: hidden;
+  background: #002658;
+  color: #fff;
+  padding-top: 4rem;
+  transition: width 0.3s ease;
+  z-index: 900; 
+}
+.sidebar.visible {
+  width: 250px;
+}
+
+.hamburger-close {
+  position: absolute;
+  top: 5rem; 
+  right: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  z-index: 1002; 
+}
+
+.menu {
+  padding: 1rem;
+  list-style: none;
+  margin-top: 2rem;
+}
+.menu li {
+  margin: 1rem 0;
+}
+.menu a,
+.menu span {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.8rem;
+  display: block;
+  border-radius: 35px;
+  font-size: 1rem;
+}
+.menu a.active {
+  background: #000d1d;
+}
+.sub-menu {
+  list-style: none;
+  margin-left: 1rem;
+  display: none;
+}
+.has-sub.open .sub-menu {
+  display: block;
+}
+hr {
+  border: none;
+  border-top: 1px solid #1a3b6e;
+  margin: 0.5rem 0;
+}
+.support {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+  text-align: center;
+}
+.support a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.view-dashboard {
+  padding-top: 60px;
+}
+.dashboard-content {
+  padding: 2rem;
+  transition: margin-left 0.3s ease;
+}
+.sidebar.visible ~ .dashboard-content {
+  margin-left: 250px;
+}
+
+h1 {
+  margin: 4rem 0 2rem 4rem;
+  color: #002658;
+  text-align: left;
+}
+.status-sensors {
+  margin: 2rem 4rem;
+}
+.status-sensors h2 {
+  margin-bottom: 1rem;
+  color: #002658;
+}
+.status-sensors .cards {
+  display: flex;
+  gap: 2rem;
+}
+.card {
+  flex: 1;
+  background: #BAD8FF;
+  color: #002658;
+  padding: 1.2rem;
+  border-radius: 35px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.camera-stream {
+  margin: 3rem 4rem;
+}
+.camera-stream h3 {
+  color: #002658;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+.camera-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0;              
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+#camera-stream {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.sos-button {
+  position: fixed; bottom: 1rem; right: 1rem;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1200;
+
+}
+.sos-button img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.sos-modal.hidden { 
+  display: none; }
+.sos-modal {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.3);
+  opacity: 0; visibility: hidden;
+  transition: opacity .3s;
+  z-index: 1100;
+}
+.sos-modal:not(.hidden) {
+  opacity: 1; visibility: visible;
+}
+
+.sos-content {
+  position: absolute;
+  bottom: 3rem; right: 3rem;
+  background: #fff;
+  padding: .5rem;
+  border-radius: 20px;
+  width: 200px; max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.sos-content h3 { margin-bottom: 0.7rem; color: #002658; }
+.sos-cards {
+  display: flex; flex-direction: column; gap: .5rem; margin: .5rem;
+}
+.sos-card {
+  display: flex; 
+  align-items: center; 
+  gap: 0.8rem;
+  background: #BAD8FF; 
+  padding: 0.8rem; 
+  border-radius: 35px;
+  transition: background-color 0.2s ease;
+}
+
+.sos-card img {
+  width: 24px; height: 24px; object-fit: contain;
+}
+
+.sos-card:hover, 
+.sos-card:focus {
+ background-color: #77b4ff;
+}
+.icon-placeholder {
+  width: 32px; height: 32px; background: #fff;
+  border-radius: 50%; display: inline-block;
+}
+.close-sos { display: none; }
+
+.system-switch {
+  position: absolute;
+  top: 6rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+.switch input {
+  opacity: 0;
+  width: 0; height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: 0.4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; width: 18px;
+  left: 3px; bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+input:checked + .slider {
+  background-color: #4caf50;
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* --- INICIO DE RESPONSIVIDAD --- */
+
+@media (max-width: 900px) {
+  /* 1. AJUSTES GENERALES DE CONTENIDO */
+  .view-dashboard {
+    /* Quitamos los márgenes gigantes laterales */
+    overflow-x: hidden; 
+  }
+
+  h1 {
+    /* Reducimos el margen y el tamaño del título */
+    margin: 2rem 1.5rem 1rem;
+    font-size: 1.8rem;
+  }
+
+  /* 2. EL SIDEBAR (MENÚ LATERAL) */
+  .sidebar {
+    /* Aumentamos z-index para que tape todo al abrirse en móvil */
+    z-index: 1100;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.5); /* Sombra para profundidad */
+  }
+
+  /* IMPORTANTE: En móvil, cuando el sidebar sale, NO empujamos el contenido */
+  .sidebar.visible ~ .dashboard-content {
+    margin-left: 0;
+    /* Opcional: oscurecer el fondo si quisieras, 
+       pero por ahora solo evitamos el empuje */
+  }
+
+  /* 3. SWITCH DEL SISTEMA */
+  /* Lo sacamos de posición absoluta para que no tape el título */
+  .system-switch {
+    position: static; /* Ya no flota */
+    margin: 0 1.5rem 1rem; /* Margen alineado con el contenido */
+    justify-content: flex-start; /* Alinear a la izquierda */
+    width: auto;
+  }
+  
+  /* 4. TARJETAS DE SENSORES */
+  .status-sensors {
+    margin: 1rem 1.5rem;
+  }
+  
+  .status-sensors .cards {
+    /* Cambiamos de fila a columna */
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .card {
+    width: 100%; /* Ocupar todo el ancho disponible */
+    padding: 1rem;
+  }
+
+  /* 5. CÁMARA */
+  .camera-stream {
+    margin: 2rem 1.5rem 5rem; /* Margen inferior extra para el botón SOS */
+  }
+
+  .camera-container {
+    border-radius: 12px;
+  }
+
+  /* 6. BOTÓN Y MODAL SOS */
+  .sos-button {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .sos-content {
+    /* Ajustamos el modal para que no se salga de pantalla */
+    right: 1.5rem;
+    bottom: 4.5rem;
+    width: 220px;
+  }
+
+  /* 7. HEADER */
+  header {
+    padding: 0.8rem 1rem;
+  }
+  
+  /* Opcional: Ocultar el nombre del usuario en pantallas MUY pequeñas */
+  @media (max-width: 400px) {
+    #user-name {
+      display: none;
+    }
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+}

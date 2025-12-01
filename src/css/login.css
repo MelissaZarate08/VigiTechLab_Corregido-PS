@@ -1,0 +1,181 @@
+/* --- ESTILOS BASE (Desktop) --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Usamos min-height en lugar de height fijo para evitar cortes si el contenido crece */
+  min-height: 100vh; 
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f2f5; /* Color de fondo de seguridad */
+}
+
+.login-wrapper {
+  display: flex;
+  width: 100vw;
+  min-height: 100vh;
+  /* overflow-x hidden evita scroll horizontal accidental */
+  overflow-x: hidden; 
+}
+
+.login-image {
+  flex: 1.5; /* Ajustado para mejor proporción */
+  background: url('/images/labLogin.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+/* Capa oscura opcional sobre la imagen para mejorar contraste si pones texto encima */
+.login-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 38, 88, 0.2); 
+}
+
+.login-card {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* El margen negativo es genial, lo mantenemos */
+  margin-left: -4rem; 
+  padding: 2rem;
+  
+  /* Bordes redondeados solo a la izquierda */
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 10; /* Aseguramos que esté por encima de la imagen */
+}
+
+.login-logo {
+  width: 64px;
+  margin-bottom: 1rem;
+}
+
+.login-title {
+  font-size: 1.75rem;
+  color: #002658;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* CORRECCIÓN IMPORTANTE: Quitamos el padding lateral fijo */
+.login-form {
+  width: 100%;
+  max-width: 400px; /* Esto asegura que no se estire demasiado ni se aplaste */
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; /* Un poco más de espacio entre inputs */
+}
+
+.login-form label {
+  font-size: 0.9rem;
+  color: #1556AC;
+  padding: 0.2rem 0;
+  text-align: left;
+  font-weight: 500;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.9rem 1rem; /* Inputs un poco más altos para tactil */
+  font-size: 1rem;
+  border: none;
+  border-radius: 1.5rem;
+  background-color: #E6F0FF; /* Un azul más suave para mejor lectura */
+  color: #002658;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.login-form input:focus {
+  box-shadow: 0 0 0 2px #1556AC; /* Indicador de foco */
+  background-color: #ffffff;
+}
+
+.login-form input::placeholder {
+  color: #7a9cc6;
+}
+
+.login-form button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  background-color: #002658;
+  color: #ffffff;
+  border: none;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.1s ease, opacity 0.2s ease, box-shadow 0.2s;
+}
+
+.login-form button:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 38, 88, 0.3);
+}
+
+.login-footer {
+  margin-top: 2.5rem;
+  font-size: 0.85rem;
+  color: #737373;
+  text-align: center;
+}
+
+.login-footer a {
+  color: #1556AC;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* --- RESPONSIVE (Móvil y Tablets) --- */
+@media (max-width: 900px) {
+  /* CAMBIO: Punto de quiebre a 900px para tablets verticales */
+  
+  .login-wrapper {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .login-image {
+    width: 100%;
+    /* En lugar de ocultarla, la usamos de cabecera */
+    display: block; 
+    height: 25vh; /* Ocupa el 25% superior de la pantalla */
+    min-height: 180px;
+    flex: none;
+  }
+
+  .login-card {
+    width: 100%;
+    flex: 1; /* Ocupa el resto del espacio */
+    margin-left: 0;
+    /* Efecto solapado hacia arriba: la tarjeta sube sobre la imagen */
+    margin-top: -2rem; 
+    
+    /* Cambiamos bordes para que parezca una hoja saliendo de abajo */
+    border-radius: 2rem 2rem 0 0; 
+    padding: 3rem 1.5rem;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  }
+
+  .login-form {
+    /* En móvil permitimos que use todo el ancho disponible */
+    max-width: 100%; 
+  }
+}
