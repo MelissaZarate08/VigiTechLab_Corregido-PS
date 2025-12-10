@@ -137,7 +137,7 @@ export function initCamMotionSensors() {
       }
       return;
     }
-    if(!data.id?.startsWith('motion')) return;
+    if(data.type !== 'motion') return;
 
     chartData.push(data);
     if(chartData.length>MAX_POINTS) chartData.shift();

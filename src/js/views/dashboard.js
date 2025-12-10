@@ -64,74 +64,93 @@ export function initDashboard() {
     wsClient?.close();
     clearInterval(pollingId);
   }
+function onData(data) {
+  if (localStorage.getItem('vigitech-system') !== 'on') return;
 
-  function onData(data) {
-    if (localStorage.getItem('vigitech-system') !== 'on') return;
+  const gasEl    = document.getElementById('gas-status'),
+        partEl   = document.getElementById('particle-status'),
+        motionEl = document.getElementById('motion-status');
+  if (!gasEl || !partEl || !motionEl) return;
 
-    const gasEl    = document.getElementById('gas-status'),
-          partEl   = document.getElementById('particle-status'),
-          motionEl = document.getElementById('motion-status');
-    if (!gasEl || !partEl || !motionEl) return;
+  const states = {
+    gas:      localStorage.getItem('vigitech-gas') === 'on',
+    particle: localStorage.getItem('vigitech-particle') === 'on',
+    motion:   localStorage.getItem('vigitech-motion') === 'on'
+  };
 
-    const states = {
-      gas:      localStorage.getItem('vigitech-gas') === 'on',
-      particle: localStorage.getItem('vigitech-particle') === 'on',
-      motion:   localStorage.getItem('vigitech-motion') === 'on'
-    };
+  console.log(' PROCESANDO EN DASHBOARD:', data); // DEBUG
 
-    const now      = Date.now(),
-          cooldown = 5000;
-    const last = {
-      gas:      +localStorage.getItem('vigitech-alert-gas')      || 0,
-      particle: +localStorage.getItem('vigitech-alert-particle') || 0,
-      motion:   +localStorage.getItem('vigitech-alert-motion')   || 0,
-    };
-    function offToast(key, msg) {
-      if (now - last[key] > cooldown) {
-        Toastify({ text: msg, duration:4000, gravity:"top", position:"right", style:{background:"#999"} }).showToast();
-        localStorage.setItem(`vigitech-alert-${key}`, now);
-      }
+  // CAMBIO CRÍTICO: Usar el campo 'type' en lugar de verificar el 'id'
+  const sensorType = data.type;
+
+  if (sensorType === 'gas') {
+    if (!states.gas) {
+      console.log(' Sensor de gas está apagado');
+      return;
     }
-
-    // — GAS —
-    if (data.id?.startsWith('g-')) {
-      if (!states.gas) { offToast('gas', "Sensor de gas está apagado"); return; }
-      gasEl.innerHTML = `<strong>Gas:</strong><br>LPG: ${data.lpg}<br>CO: ${data.co}<br>Humo: ${data.smoke}`;
-      const alarm = data.lpg > THRESHOLDS.gas.LPG || data.co > THRESHOLDS.gas.CO || data.smoke > THRESHOLDS.gas.Smoke;
-      if (alarm && !alerted.gas) {
-        alerted.gas = true;
-        if (audioReady) { alertSound.currentTime = 0; alertSound.play().catch(() => {}); }
-        Toastify({ text:"Alerta de gas alto", duration:5000, gravity:"top", position:"right", style:{background:"#e63946"} }).showToast();
-      }
-      if (!alarm) alerted.gas = false;
+    gasEl.innerHTML = `<strong>Gas:</strong><br>LPG: ${data.lpg.toFixed(2)}<br>CO: ${data.co.toFixed(2)}<br>Humo: ${data.smoke.toFixed(2)}`;
+    
+    const THRESHOLDS = { LPG:1000, CO:50, Smoke:50 };
+    const alarm = data.lpg > THRESHOLDS.LPG || data.co > THRESHOLDS.CO || data.smoke > THRESHOLDS.Smoke;
+    if (alarm && !alerted.gas) {
+      alerted.gas = true;
+      if (audioReady) { alertSound.currentTime = 0; alertSound.play().catch(() => {}); }
+      Toastify({ 
+        text:" Alerta de gas alto", 
+        duration:5000, 
+        gravity:"top", 
+        position:"right", 
+        style:{background:"#e63946"} 
+      }).showToast();
     }
-
-    if (data.id?.startsWith('p-')) {
-      if (!states.particle) { offToast('particle', "Sensor de partículas está apagado"); return; }
-      partEl.innerHTML = `<strong>Partículas:</strong><br>PM1.0: ${data.pm1_0}<br>PM2.5: ${data.pm2_5}<br>PM10: ${data.pm10}`;
-      const alarm = data.pm1_0 > THRESHOLDS.particle.PM1_0
-                 || data.pm2_5 > THRESHOLDS.particle.PM2_5
-                 || data.pm10  > THRESHOLDS.particle.PM10;
-      if (alarm && !alerted.particle) {
-        alerted.particle = true;
-        if (audioReady) { alertSound.currentTime = 0; alertSound.play().catch(() => {}); }
-        Toastify({ text:"Alerta de partículas alto", duration:5000, gravity:"top", position:"right", style:{background:"#e63946"} }).showToast();
-      }
-      if (!alarm) alerted.particle = false;
-    }
-
-    if (data.id?.startsWith('motion')) {
-      if (!states.motion) { offToast('motion', "Sensor de movimiento está apagado"); return; }
-      const estado = data.motion_detected ? 'Detectado' : 'Sin movimiento';
-      motionEl.innerHTML = `<strong>Movimiento:</strong><br>Estado: ${estado}<br>Intensidad: ${data.intensity ?? '–'}`;
-      if (data.motion_detected && !alerted.motion) {
-        alerted.motion = true;
-        if (audioReady) { alertSound.currentTime = 0; alertSound.play().catch(() => {}); }
-        Toastify({ text:"Se detectó movimiento", duration:5000, gravity:"top", position:"right", style:{background:"#e63946"} }).showToast();
-      }
-      if (!data.motion_detected) alerted.motion = false;
-    }
+    if (!alarm) alerted.gas = false;
   }
+
+  if (sensorType === 'particles') {
+    if (!states.particle) {
+      console.log(' Sensor de partículas está apagado');
+      return;
+    }
+    partEl.innerHTML = `<strong>Partículas:</strong><br>PM1.0: ${data.pm1_0.toFixed(2)}<br>PM2.5: ${data.pm2_5.toFixed(2)}<br>PM10: ${data.pm10.toFixed(2)}`;
+    
+    const THRESHOLDS = { PM1_0:12, PM2_5:35, PM10:50 };
+    const alarm = data.pm1_0 > THRESHOLDS.PM1_0 || data.pm2_5 > THRESHOLDS.PM2_5 || data.pm10 > THRESHOLDS.PM10;
+    if (alarm && !alerted.particle) {
+      alerted.particle = true;
+      if (audioReady) { alertSound.currentTime = 0; alertSound.play().catch(() => {}); }
+      Toastify({ 
+        text:" Alerta de partículas alto", 
+        duration:5000, 
+        gravity:"top", 
+        position:"right", 
+        style:{background:"#e63946"} 
+      }).showToast();
+    }
+    if (!alarm) alerted.particle = false;
+  }
+
+  if (sensorType === 'motion') {
+    if (!states.motion) {
+      console.log(' Sensor de movimiento está apagado');
+      return;
+    }
+    const estado = data.motion_detected ? ' Detectado' : ' Sin movimiento';
+    motionEl.innerHTML = `<strong>Movimiento:</strong><br>Estado: ${estado}<br>Intensidad: ${data.intensity?.toFixed(2) ?? '–'}`;
+    
+    if (data.motion_detected && !alerted.motion) {
+      alerted.motion = true;
+      if (audioReady) { alertSound.currentTime = 0; alertSound.play().catch(() => {}); }
+      Toastify({ 
+        text:" Se detectó movimiento", 
+        duration:5000, 
+        gravity:"top", 
+        position:"right", 
+        style:{background:"#e63946"} 
+      }).showToast();
+    }
+    if (!data.motion_detected) alerted.motion = false;
+  }
+}
 
   const streamImg = document.getElementById('camera-stream');
   async function fetchLatestFrame() {

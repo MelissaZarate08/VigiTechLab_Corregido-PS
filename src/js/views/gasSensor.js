@@ -149,7 +149,7 @@ btnTable.onclick = () => {
       }
       return;
     }
-    if (!data.id?.startsWith('g-')) return;
+    if (data.type !== 'gas') return;
 
     chartData.push(data);
     if (chartData.length > MAX_POINTS) chartData.shift();

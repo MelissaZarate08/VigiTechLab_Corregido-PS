@@ -148,7 +148,7 @@ function onData(data) {
     return;
   }
 
-  if (!data.id?.startsWith('p-')) return;
+  if (data.type !== 'particles') return;
 
   chartData.push(data);
   if (chartData.length > MAX_POINTS) chartData.shift();
